@@ -7,7 +7,7 @@ import useSubjects from '../../hooks/subjects/useSubjects.hook';
 import { Card } from '../common';
 
 const SubjectsTable: React.FC = () => {
-  const subjects = useRecoilValue(subjectsAtom);
+  const { data: subjects, loading } = useRecoilValue(subjectsAtom);
 
   const { getSubjects } = useSubjects();
 
@@ -23,11 +23,10 @@ const SubjectsTable: React.FC = () => {
 
   return (
     <Card>
-      <CommonTable
-        title="Disciplinas"
-        columns={columns}
-        data={subjects}
-      />
+      { loading
+        ? <h3>Tabela carregando...</h3>
+        :  <CommonTable title="Disciplinas" columns={columns} data={subjects} />
+      }
     </Card>
   );
 }

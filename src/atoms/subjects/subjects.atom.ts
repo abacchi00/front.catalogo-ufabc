@@ -3,5 +3,5 @@ import { Subject } from "../../interfaces/subjects";
 
 export const subjectsAtom = atom({
   key: 'subjectsAtom',
-  default: [] as Subject[],
+  default: { data: [] as Subject[], loading: false },
 });

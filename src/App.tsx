@@ -1,6 +1,6 @@
 import { SubjectsTable } from './components/SubjectsTable';
 import { MainLayout } from './components/MainLayout';
-import { Redirect, Route, Switch, BrowserRouter } from 'react-router-dom';
+import { Switch, BrowserRouter } from 'react-router-dom';
 
 import { MainContainer } from './App.styles';
 

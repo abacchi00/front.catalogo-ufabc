@@ -5,16 +5,19 @@ import { subjectsAtom } from '../../atoms/subjects/subjects.atom';
 
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api/v1/',
+  baseURL: 'https://calm-fjord-47501.herokuapp.com/api/v1', // porque que tenho que usar essa url??
+  //baseURL: 'http://localhost:3000/api/v1/',
 });
 
 const useSubjects = () => {
   const setSubjects = useSetRecoilState(subjectsAtom);
 
   const getSubjects = useCallback(async () => {
-    const response = await api.get('subjects');
+    setSubjects(prevState => ({ ...prevState, loading: true }))
 
-    setSubjects(response.data);
+    const { data } = await api.get('subjects');
+
+    setSubjects({ data, loading: false });
   }, [setSubjects]);
 
   return {
