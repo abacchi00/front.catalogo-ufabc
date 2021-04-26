@@ -1,10 +1,15 @@
 import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import { CommonTable } from './SubjectsTable.styles';
 
 import { subjectsAtom } from '../../atoms/subjects/subjects.atom';
-import useSubjects from '../../hooks/subjects/useSubjects.hook';
+
+
 import { Card } from '../common';
+import { SubjectCard } from '../SubjectCard';
+
+import useSubjects from '../../hooks/subjects/useSubjects.hook';
+
+import { CommonTable, SubjectCardsContainer } from './SubjectsTable.styles';
 
 const SubjectsTable: React.FC = () => {
   const { data: subjects, loading } = useRecoilValue(subjectsAtom);
@@ -22,12 +27,18 @@ const SubjectsTable: React.FC = () => {
   }, [getSubjects])
 
   return (
-    <Card>
-      { loading
-        ? <h3>Tabela carregando...</h3>
-        :  <CommonTable title="Disciplinas" columns={columns} data={subjects} />
-      }
-    </Card>
+    <>
+      <SubjectCardsContainer>
+        {subjects.map(subject => <SubjectCard subject={subject}/>)}
+      </SubjectCardsContainer>
+
+      {/* <Card>
+        { loading
+          ? <h3>Tabela carregando...</h3>
+          :  <CommonTable title="Disciplinas" columns={columns} data={subjects} />
+        }
+      </Card> */}
+    </>
   );
 }
 
